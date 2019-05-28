@@ -1,2 +1,6 @@
-<h1>Entries#index</h1>
-<p>Find me in app/views/entries/index.html.erb</p>
+<div>
+  <% if @entries.any? %>
+    <h3>Lastest entries</h3>
+    <div><%= render @entries %></div>
+  <% end %>
+</div>
