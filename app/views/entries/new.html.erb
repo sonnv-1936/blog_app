@@ -1,2 +1,7 @@
-<h1>Entries#new</h1>
-<p>Find me in app/views/entries/new.html.erb</p>
+<%= form_for @entry do |f| %>
+  <%= render "shared/error_messages", resource: @entry %>
+
+  <%= f.text_field :title, placeholder: "Entry's title..." %><br>
+  <%= f.text_area :body, placeholder: "Entry's body..." %>
+  <%= f.submit "Post" %>
+<% end %>

@@ -1,7 +1,27 @@
 class EntriesController < ApplicationController
-  def index; end
+  attr_reader :entry
 
-  def new; end
+  def index
+    @entries = Entry.all
+  end
 
-  def create; end
+  def new
+    @entry = Entry.new
+  end
+
+  def create
+    @entry = current_user.entries.build entry_params
+    if entry.save
+      flash[:success] = "Entry created successfully!"
+      redirect_to root_url
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def entry_params
+    params.require(:entry).permit :title, :body
+  end
 end
