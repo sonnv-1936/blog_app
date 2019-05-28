@@ -1,6 +1,8 @@
 class EntriesController < ApplicationController
   attr_reader :entry
 
+  before_action :find_entry, only: :show
+
   def index
     if params[:page] == "0" || params[:page] == "1" || params[:page] == nil
       page = 0
@@ -11,6 +13,10 @@ class EntriesController < ApplicationController
       .offset((page.to_i > 1 ? page.to_i - 1 : page.to_i) * 5)
     total_entries = Entry.all.size
     @total_pages = total_entries % 5 == 0 ? total_entries / 5 : total_entries / 5 + 1
+  end
+
+  def show
+    @comment = entry.comments.build
   end
 
   def new
@@ -31,5 +37,9 @@ class EntriesController < ApplicationController
 
   def entry_params
     params.require(:entry).permit :title, :body
+  end
+
+  def find_entry
+    @entry = Entry.find_by id: params[:entry_id]
   end
 end

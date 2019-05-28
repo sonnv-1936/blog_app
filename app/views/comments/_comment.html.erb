@@ -1,0 +1,6 @@
+<b><%= link_to comment.user.name, comment.user %></b>
+<i>
+  commented on <b><%= comment.created_at.strftime "%m/%d/%y" %></b> at
+  <b><%= comment.created_at.strftime "%H:%M" %></b>
+</i><br>
+<%= comment.content %><br>
