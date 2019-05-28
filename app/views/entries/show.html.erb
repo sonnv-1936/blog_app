@@ -6,9 +6,7 @@ Author: <b><%= @entry.user.name %></b><br>
 
 <h4>Comments:</h4>
 
-<% if @entry.comments.reject(&:new_record?).any? %>
-  <%= render @entry.comments.reject &:new_record? %>
-<% end %>
+<%= render @entry.comments.reject &:new_record? %>
 
 <%= form_for @comment do |f| %>
   <%= f.text_field :content, placeholder: "Comment...", autofocus: true,
