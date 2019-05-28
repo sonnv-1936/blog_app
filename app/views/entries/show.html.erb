@@ -8,11 +8,13 @@ Author: <b><%= @entry.user.name %></b><br>
 
 <%= render @entry.comments.reject &:new_record? %>
 
-<%= form_for @comment do |f| %>
-  <%= f.text_field :content, placeholder: "Comment...", autofocus: true,
-    autocomplete: :off %>
-  <%= hidden_field_tag "comment[user_id]", current_user.id %>
-  <%= hidden_field_tag "comment[entry_id]", @entry.id %>
+<% if logged_in? %>
+  <%= form_for @comment do |f| %>
+    <%= f.text_field :content, placeholder: "Comment...", autofocus: true,
+      autocomplete: :off %>
+    <%= hidden_field_tag "comment[user_id]", current_user.id %>
+    <%= hidden_field_tag "comment[entry_id]", @entry.id %>
 
-  <%= f.submit "Comment" %>
+    <%= f.submit "Comment" %>
+  <% end %>
 <% end %>
