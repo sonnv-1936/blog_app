@@ -1,6 +1,7 @@
 <div>
   <% if @entries.any? %>
-    <h3>Lastest entries</h3>
+    <h3>Latest entries</h3>
     <div><%= render @entries %></div>
+    <%= paginate @total_pages %>
   <% end %>
 </div>

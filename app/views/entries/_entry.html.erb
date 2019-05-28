@@ -1,4 +1,5 @@
 <span><b><%= entry.title %></b> by <%= link_to entry.user.name, entry.user %></span><br>
 <span><%= entry.body %></span><br>
 <i>Posted on <%= entry.created_at.strftime "%m/%d/%y" %> at
-  <%= entry.created_at.strftime "%H:%M" %></i>
+  <%= entry.created_at.strftime "%H:%M" %></i><br>
+<hr>
