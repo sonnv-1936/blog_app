@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   attr_reader :user
 
-  before_action :find_user, only: :show
+  before_action :find_user, only: %i(show destroy)
+  before_action :authenticate_administrator, only: :destroy
 
   def new
     @user = User.new
@@ -41,6 +42,11 @@ class UsersController < ApplicationController
     total_entries = current_user.following_entries.size
     @total_pages = total_entries % 5 == 0 ? total_entries / 5 : total_entries / 5 + 1
     render "entries/index"
+  end
+
+  def destroy
+    user.destroy
+    redirect_back fallback_location: root_path
   end
 
   private

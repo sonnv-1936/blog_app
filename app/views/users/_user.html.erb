@@ -1,0 +1,7 @@
+<p>
+  <%= link_to "#{user.name} - #{user.email}", user %>
+  <% if current_user&.admin? %>
+    <b><%= link_to "Delete", user, method: :delete,
+      data: {confirm: "Are you sure?"} %></b>
+  <% end %>
+</p>

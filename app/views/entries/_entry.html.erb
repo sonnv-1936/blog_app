@@ -1,7 +1,13 @@
-<span><b><%= link_to entry.title, entry %></b> by
-<%= link_to entry.user.name, entry.user %></span><br>
+<span>
+  <b><%= link_to entry.title, entry %></b> by
+  <%= link_to entry.user.name, entry.user %>
+</span>
+
+<% if current_user&.admin? %>
+  <b><%= link_to "Delete", entry, method: :delete,
+    data: {confirm: "Are you sure?"} %></b>
+<% end %><br>
 
 <span><%= entry.body %></span><br>
 <i>Posted on <b><%= entry.created_at.strftime "%m/%d/%y" %></b> at
-  <b><%= entry.created_at.strftime "%H:%M" %></b></i><br>
-<hr>
+  <b><%= entry.created_at.strftime "%H:%M" %></b></i><br><hr>
