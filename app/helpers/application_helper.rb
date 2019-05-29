@@ -20,4 +20,8 @@ module ApplicationHelper
   def current_user? user
     user == current_user
   end
+
+  def entry_commentable? entry
+    current_user.following?(entry.user) || current_user == entry.user
+  end
 end
