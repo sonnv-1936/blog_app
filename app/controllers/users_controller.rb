@@ -3,8 +3,6 @@ class UsersController < ApplicationController
 
   before_action :find_user, only: :show
 
-  def show; end
-
   def new
     @user = User.new
   end
@@ -18,6 +16,31 @@ class UsersController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    if params[:page] == "0" || params[:page] == "1" || params[:page] == nil
+      page = 0
+    else
+      page = params[:page]
+    end
+    @user_entries = user.entries.latest.limit(5)
+      .offset((page.to_i > 1 ? page.to_i - 1 : page.to_i) * 5)
+    total_entries = user.entries.size
+    @user_entries_pages = total_entries % 5 == 0 ? total_entries / 5 : total_entries / 5 + 1
+  end
+
+  def following_entries
+    if params[:page] == "0" || params[:page] == "1" || params[:page] == nil
+      page = 0
+    else
+      page = params[:page]
+    end
+    @entries = current_user.following_entries.latest.limit(5)
+      .offset((page.to_i > 1 ? page.to_i - 1 : page.to_i) * 5)
+    total_entries = current_user.following_entries.size
+    @total_pages = total_entries % 5 == 0 ? total_entries / 5 : total_entries / 5 + 1
+    render "entries/index"
   end
 
   private

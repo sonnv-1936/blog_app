@@ -1,3 +1,14 @@
-<h2>Name: <%= @user.name %></h2>
-<h3>Email: <%= @user.email %></h3>
-<%= render "follow_form", user: @user if logged_in? %>
+<div class="user_info">
+  <h2>Name: <%= @user.name %></h2>
+  <h3>Email: <%= @user.email %></h3>
+  <%= render "follow_form", user: @user if logged_in? %>
+</div>
+<div class="user_entries">
+  <% if @user.entries.any? %>
+    <h3>Latest entries</h3>
+    <div><%= render @user_entries %></div>
+    <%= paginate @user_entries_pages %>
+  <% else %>
+    <h3>This user doesn't have any entries yet!</h3>
+  <% end %>
+</div>

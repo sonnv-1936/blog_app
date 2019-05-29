@@ -29,4 +29,8 @@ class User < ApplicationRecord
   def following? other_user
     following.include? other_user
   end
+
+  def following_entries
+    Entry.where user_id: following_ids
+  end
 end

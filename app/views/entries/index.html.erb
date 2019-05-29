@@ -3,5 +3,7 @@
     <h3>Latest entries</h3>
     <div><%= render @entries %></div>
     <%= paginate @total_pages %>
+  <% else %>
+    <h3>There is no entries in this page yet!</h3>
   <% end %>
 </div>

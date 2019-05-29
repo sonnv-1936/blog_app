@@ -1,5 +1,5 @@
 <h2><%= @entry.title %></h2>
-Author: <b><%= @entry.user.name %></b><br>
+Author: <b><%= link_to @entry.user.name, @entry.user %></b><br>
 <i>Posted on: <b><%= @entry.created_at.strftime "%m/%d/%y" %></b> at
   <b><%= @entry.created_at.strftime "%H:%M" %></b></i><br>
 <p><%= @entry.body %></p>
@@ -8,7 +8,7 @@ Author: <b><%= @entry.user.name %></b><br>
 
 <%= render @entry.comments.reject &:new_record? %>
 
-<% if logged_in? %>
+<% if logged_in? && entry_commentable?(@entry) %>
   <%= form_for @comment do |f| %>
     <%= f.text_field :content, placeholder: "Comment...", autofocus: true,
       autocomplete: :off %>
