@@ -24,4 +24,10 @@ module ApplicationHelper
   def entry_commentable? entry
     current_user.following?(entry.user) || current_user == entry.user
   end
+
+  def authenticate_administrator
+    return true if current_user&.admin?
+    flash[:error] = "You don't have permission for this action!"
+    redirect_to root_path
+  end
 end

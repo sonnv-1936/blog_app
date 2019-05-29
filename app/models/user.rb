@@ -4,6 +4,7 @@ class User < ApplicationRecord
   before_save {email.downcase!}
 
   has_many :entries, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :active_relationships, class_name: Relationship.name,
     foreign_key: :follower_id, dependent: :destroy
   has_many :passive_relationships, class_name: Relationship.name,

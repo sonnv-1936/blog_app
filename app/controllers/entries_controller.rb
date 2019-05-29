@@ -1,7 +1,8 @@
 class EntriesController < ApplicationController
   attr_reader :entry
 
-  before_action :find_entry, only: :show
+  before_action :find_entry, only: %i(show destroy)
+  before_action :authenticate_administrator, only: :destroy
 
   def index
     if params[:page] == "0" || params[:page] == "1" || params[:page] == nil
@@ -31,6 +32,11 @@ class EntriesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    entry.destroy
+    redirect_back fallback_location: root_path
   end
 
   private

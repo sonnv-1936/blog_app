@@ -1,0 +1,7 @@
+<% @manageables.each do |manageable| %>
+  <% next if manageable.empty? %>
+  <div class="manageable_column">
+    <h3>List of all <%= manageable.first.class.to_s.downcase %></h3>
+    <%= render manageable %>
+  </div>
+<% end %>
