@@ -30,4 +30,10 @@ module ApplicationHelper
     flash[:error] = "You don't have permission for this action!"
     redirect_to root_path
   end
+
+  def authenticate_user
+    return true if logged_in?
+    flash[:error] = "You need to sign in first!"
+    redirect_to root_path
+  end
 end
