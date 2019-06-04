@@ -1,6 +1,7 @@
 class EntriesController < ApplicationController
   attr_reader :entry
 
+  before_action :authenticate_user, only: %i(new create destroy)
   before_action :find_entry, only: %i(show destroy)
   before_action :authenticate_administrator, only: :destroy
 

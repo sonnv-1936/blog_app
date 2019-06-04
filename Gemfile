@@ -31,6 +31,8 @@ group :test do
   gem "selenium-webdriver"
   gem "chromedriver-helper"
   gem "shoulda-matchers", "4.0.1"
+  gem "rspec-activemodel-mocks", "1.1.0"
+  gem "rails-controller-testing", "1.0.4"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
